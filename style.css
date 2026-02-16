@@ -669,7 +669,7 @@ body {
 }
 
 .testi_label {
-  color:;
+
   font-size: 16px;
   display: block; 
   padding: 40px 0 20px 0; 
@@ -679,7 +679,7 @@ body {
 }
 
 .testi_title {
-  color:;
+
   font-size: 36px; 
   width: 700px; 
   margin-bottom: 60px; 
@@ -1141,7 +1141,7 @@ body {
 }
 .f_log {
   height: 22px;
-  width: auto;
+  width: 60%;
 }
 
 .f_social {
