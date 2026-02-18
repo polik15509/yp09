@@ -236,7 +236,7 @@ body {
   filter: none;
 }
 
-/* Responsive */
+
 @media (max-width: 900px) {
   .press_logos {
     justify-content: center;
@@ -259,7 +259,7 @@ body {
 }
 
 
-/* Process Section Styles */
+
 .process {
   padding: 80px 40px;
   background-color: #fff;
@@ -363,7 +363,7 @@ body {
   z-index: 3;
 }
 
-/* Responsive */
+
 @media (max-width: 900px) {
   .sect_title {
     font-size: 36px;
@@ -416,8 +416,6 @@ body {
 }
 
 
-
-/* Food Section Styles */
 .food {
   padding: 80px 40px;
   background-color: #fff;
@@ -609,7 +607,7 @@ body {
   border-bottom-color: transparent;
 }
 
-/* Responsive */
+
 @media (max-width: 1100px) {
   .food_basic {
     grid-template-columns: repeat(3, 1fr);
