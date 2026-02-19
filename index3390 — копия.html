@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omnifood — здоровое питание</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Хедер */
+    .hero {
+      padding: 20px 40px;
+      background-color: #fdf2e9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .c_logo {
+      height: 22px;
+      width: auto;
+      z-index: 100;
+    }
+
+    /* Бургер-меню */
+    .burger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      z-index: 100;
+      position: relative;
+    }
+
+    .burger-line {
+      width: 100%;
+      height: 3px;
+      background-color: #333;
+      transition: all 0.3s ease;
+      border-radius: 3px;
+    }
+
+    .burger-menu.active .burger-line:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+      background-color: #e67e22;
+    }
+
+    .burger-menu.active .burger-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger-menu.active .burger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+      background-color: #e67e22;
+    }
+
+    .main_menu {
+      display: flex;
+    }
+
+    .m_list {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .m_item {
+      text-decoration: none;
+      color: #333;
+      font-size: 18px;
+      font-weight: 500;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .m_item:hover {
+      color: #e67e22;
+    }
+
+    .m_cta {
+      background-color: #e67e22;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 9px;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .m_cta:hover {
+      background-color: #cf711f;
+      color: white;
+    }
+
+    /* Секция feature1 */
+    .feature1 {
+      background-color: #fdf2e9;
+      padding: 60px 40px;
+    }
+
+    .f_container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .f_content {
+      flex: 1;
+    }
+
+    .f_title {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.05;
+      color: #333;
+      letter-spacing: -0.5px;
+      margin-bottom: 32px;
+    }
+
+    .f_desc {
+      font-size: 20px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 48px;
+    }
+
+    .gl {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 20px;
+      padding: 16px 32px;
+      border-radius: 9px;
+      transition: all 0.3s;
+      margin-right: 16px;
+    }
+
+    .gl_primary {
+      background-color: #e67e22;
+      color: #fff;
+    }
+
+    .gl_primary:hover {
+      background-color: #cf711f;
+    }
+
+    .gl_secondary {
+      background-color: #fff;
+      color: #555;
+    }
+
+    .gl_secondary:hover {
+      background-color: #fdf2e9;
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+
+    .s_right {
+      margin-right: 16px;
+    }
+
+    .stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 60px;
+    }
+
+    .stats_avatars {
+      display: flex;
+    }
+
+    .stats_avatars img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 3px solid #fdf2e9;
+      margin-right: -16px;
+    }
+
+    .stats_avatars img:last-child {
+      margin-right: 0;
+    }
+
+    .stats_text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .stats_h {
+      color: #cf711f;
+      font-weight: 700;
+    }
+
+    .f_visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .f_img {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* Секция "Нас упоминают" (PRESS) */
+    .press {
+      padding: 60px 40px;
+      background-color: #fff;
+    }
+
+    .press_wrap {
+      max-width: 1300px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .press_title {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 40px;
+    }
+
+    .press_logos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .press_logos img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0);
+      opacity: 0.5;
+      transition: all 0.3s;
+    }
+
+    .press_logos img:hover {
+      opacity: 1;
+      filter: none;
+    }
+
+    /* Секция "Как это работает" (PROCESS) */
+    .process {
+      padding: 80px 40px;
+      background-color: #fff;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .sect_label {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      color: #e67e22;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .sect_title {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #333;
+      letter-spacing: -0.5px;
+      margin-bottom: 80px;
+      max-width: 600px;
+    }
+
+    .process_basic {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px 80px;
+      align-items: center;
+    }
+
+    .step {
+      margin-bottom: 20px;
+    }
+
+    .step_num {
+      display: inline-block;
+      font-size: 86px;
+      font-weight: 700;
+      color: #ddd;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .step_title {
+      font-size: 30px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .step_text {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .step_img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .step_photo {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 20px;
+    }
+
+    /* Секция "Прием пищи" (FOOD/MEALS) */
+    .food {
+      padding: 80px 40px;
+      background-color: #fff;
+    }
+
+    .wrap {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .text_center {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .food_label {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #cf711f;
+      margin-bottom: 16px;
+    }
+
+    .food_title {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #333;
+      letter-spacing: -0.5px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .food_basic {
+      max-width: 1300px;
+      margin: 0 auto 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 36px rgba(0, 0, 0, 0.1);
+    }
+
+    .card_img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card_info {
+      padding: 24px;
+    }
+
+    .card_tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 20px;
+    }
+
+    .tag_green {
+      background-color: #51cf66;
+      color: #fff;
+    }
+
+    .tag_light {
+      background-color: #94d82d;
+      color: #fff;
+    }
+
+    .tag_yellow {
+      background-color: #ffd43b;
+      color: #333;
+    }
+
+    .card_name {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 24px;
+    }
+
+    .card_props {
+      list-style: none;
+    }
+
+    .prop {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .prop_icon {
+      font-size: 20px;
+      color: #e67e22;
+    }
+
+    .prop strong {
+      font-weight: 600;
+      color: #333;
+      margin-right: 4px;
+    }
+
+    .diets {
+      grid-column: span 1;
+      background-color: #fff;
+      padding: 24px;
+    }
+
+    .diets_title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 24px;
+    }
+
+    .diets_list {
+      list-style: none;
+    }
+
+    .diets_item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .diets_item::before {
+      content: "✓";
+      color: #e67e22;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .food_link {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .link {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 600;
+      color: #e67e22;
+      text-decoration: none;
+      border-bottom: 2px solid currentColor;
+      padding-bottom: 4px;
+      transition: all 0.3s;
+    }
+
+    .link:hover {
+      color: #cf711f;
+      border-bottom-color: transparent;
+    }
+
+    /* Затемнение фона при открытом меню */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 80;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* ===== АДАПТАЦИЯ ДЛЯ ЭКРАНА 390px ===== */
+    @media (max-width: 390px) {
+      /* Хедер с бургером */
+      .hero {
+        padding: 15px 20px;
+      }
+
+      .burger-menu {
+        display: flex;
+      }
+
+      .main_menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: #fdf2e9;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 90;
+      }
+
+      .main_menu.active {
+        right: 0;
+      }
+
+      .m_list {
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+        width: 100%;
+      }
+
+      .m_item {
+        font-size: 20px;
+        white-space: normal;
+        text-align: center;
+        display: block;
+        padding: 10px 20px;
+        width: 100%;
+      }
+
+      .m_cta {
+        display: inline-block;
+        width: auto;
+        margin-top: 10px;
+      }
+
+      /* Контент секции feature1 */
+      .feature1 {
+        padding: 40px 20px;
+      }
+
+      .f_container {
+        flex-direction: column-reverse;
+        gap: 30px;
+      }
+
+      .f_content {
+        text-align: center;
+      }
+
+      .f_title {
+        font-size: 36px;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+
+      .f_desc {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+
+      .f_desc br {
+        display: none;
+      }
+
+      .gl {
+        display: block;
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        padding: 14px 28px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .s_right {
+        margin-right: 0;
+      }
+
+      .stats {
+        flex-direction: column;
+        margin-top: 40px;
+        gap: 12px;
+      }
+
+      .stats_avatars img {
+        width: 42px;
+        height: 42px;
+        margin-right: -14px;
+      }
+
+      .stats_text {
+        font-size: 16px;
+        text-align: center;
+      }
+
+      .f_visual {
+        width: 100%;
+      }
+
+      .f_img {
+        max-width: 100%;
+      }
+
+      /* Секция press на 390px */
+      .press {
+        padding: 40px 20px;
+      }
+
+      .press_title {
+        font-size: 12px;
+        margin-bottom: 30px;
+      }
+
+      .press_logos {
+        justify-content: center;
+        gap: 25px;
+      }
+
+      .press_logos img {
+        height: 24px;
+        opacity: 0.6;
+      }
+
+      /* Секция process на 390px */
+      .process {
+        padding: 60px 20px;
+      }
+
+      .sect_label {
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+
+      .sect_title {
+        font-size: 32px;
+        margin-bottom: 50px;
+        max-width: 100%;
+      }
+
+      .process_basic {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .step {
+        text-align: center;
+        order: 0;
+      }
+
+      .step_num {
+        font-size: 68px;
+        margin-bottom: 16px;
+      }
+
+      .step_title {
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+
+      .step_text {
+        font-size: 16px;
+        text-align: left;
+      }
+
+      .step_img {
+        order: 1;
+        margin: 10px 0;
+      }
+
+      .step_photo {
+        max-width: 220px;
+      }
+
+      /* Переупорядочиваем шаги для правильного отображения */
+      .process_basic .step:nth-child(1) {
+        order: 1;
+      }
+      .process_basic .step_img:nth-child(2) {
+        order: 2;
+      }
+      .process_basic .step_img:nth-child(3) {
+        order: 4;
+      }
+      .process_basic .step:nth-child(4) {
+        order: 3;
+      }
+      .process_basic .step:nth-child(5) {
+        order: 5;
+      }
+      .process_basic .step_img:nth-child(6) {
+        order: 6;
+      }
+
+      /* Секция food на 390px */
+      .food {
+        padding: 60px 20px;
+      }
+
+      .text_center {
+        margin-bottom: 40px;
+      }
+
+      .food_label {
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+
+      .food_title {
+        font-size: 32px;
+        max-width: 100%;
+      }
+
+      .food_basic {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .card {
+        max-width: 100%;
+      }
+
+      .card_img {
+        height: 180px;
+      }
+
+      .card_info {
+        padding: 20px;
+      }
+
+      .card_name {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+
+      .prop {
+        font-size: 15px;
+        gap: 10px;
+      }
+
+      .diets {
+        grid-column: auto;
+        padding: 20px;
+      }
+
+      .diets_title {
+        font-size: 22px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .diets_list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .diets_item {
+        font-size: 15px;
+        margin-bottom: 0;
+      }
+
+      .food_link {
+        margin-top: 20px;
+      }
+
+      .link {
+        font-size: 16px;
+      }
+    }
+
+    /* Дополнительная адаптация для очень маленьких экранов */
+    @media (max-width: 360px) {
+      .f_title {
+        font-size: 32px;
+      }
+
+      .f_desc {
+        font-size: 16px;
+      }
+
+      .gl {
+        font-size: 16px;
+        padding: 12px 24px;
+      }
+
+      .stats_avatars img {
+        width: 38px;
+        height: 38px;
+        margin-right: -12px;
+      }
+
+      .press_logos {
+        gap: 20px;
+      }
+
+      .press_logos img {
+        height: 20px;
+      }
+
+      .sect_title {
+        font-size: 28px;
+      }
+
+      .step_num {
+        font-size: 58px;
+      }
+
+      .step_title {
+        font-size: 22px;
+      }
+
+      .step_text {
+        font-size: 15px;
+      }
+
+      .step_photo {
+        max-width: 200px;
+      }
+
+      .food_title {
+        font-size: 28px;
+      }
+
+      .diets_list {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .card_name {
+        font-size: 20px;
+      }
+    }
+  </style>
+  <!-- Ionicons для иконок (опционально) -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <img class="c_logo" src="img/omnifood-logo.png" alt="Omnifood logo" />
+    
+    <!-- Бургер-меню для мобильных -->
+    <div class="burger-menu" id="burgerMenu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </div>
+
+    <nav class="main_menu" id="mainMenu">
+      <ul class="m_list">
+        <li><a class="m_item" href="#how">Как это работает?</a></li>
+        <li><a class="m_item" href="#meals">Рецепты</a></li>
+        <li><a class="m_item" href="#test">Отзывы</a></li>
+        <li><a class="m_item" href="#pric">Цены</a></li>
+        <li><a class="m_item m_cta" href="#cta">Попробовать</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Затемнение фона при открытом меню -->
+  <div class="overlay" id="overlay"></div>
+
+  <section class="feature1">
+    <div class="f_container">
+      <div class="f_content">
+        <h1 class="f_title">
+          Здоровая еда доставляется к вашей двери каждый день
+        </h1>
+        <p class="f_desc">
+          Умная подписка на еду 365 дней в году, которая заставит вас снова питаться здорово. Подстраивается под ваши вкусы и потребности в питании.
+        </p>
+        <a href="#cta" class="gl gl_primary s_right">Начать правильно питаться</a>
+        <a href="#how" class="gl gl_secondary">Подробнее ↓</a>
+
+        <div class="stats">
+          <div class="stats_avatars">
+            <img src="img/customers/customer-1.jpg" alt="customer 1" />
+            <img src="img/customers/customer-2.jpg" alt="customer 2" />
+            <img src="img/customers/customer-3.jpg" alt="customer 3" />
+            <img src="img/customers/customer-4.jpg" alt="customer 4" />
+            <img src="img/customers/customer-5.jpg" alt="customer 5" />
+            <img src="img/customers/customer-6.jpg" alt="customer 6" />
+          </div>
+          <p class="stats_text"><span class="stats_h">250,000+</span> доставок в прошлом году</p>
+        </div>
+      </div>
+
+      <div class="f_visual">
+        <img src="img/hero.webp" class="f_img" alt="Здоровое питание — блюдо" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Секция "Нас упоминают" -->
+  <section class="press">
+    <div class="press_wrap">
+      <h2 class="press_title">Нас упоминают</h2>
+      <div class="press_logos">
+        <img src="img/logos/techcrunch.png" alt="TechCrunch" />
+        <img src="img/logos/business-insider.png" alt="Business Insider" />
+        <img src="img/logos/the-new-york-times.png" alt="The New York Times" />
+        <img src="img/logos/forbes.png" alt="Forbes" />
+        <img src="img/logos/usa-today.png" alt="USA TODAY" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Секция "Как это работает" (PROCESS) -->
+  <section class="process" id="how">
+    <div class="container">
+      <span class="sect_label">Как это работает</span>
+      <h2 class="sect_title">
+        Ваша ежедневная доза здоровья в 3 простых шага
+      </h2>
+    </div>
+
+    <div class="process_basic">
+      <!-- Шаг 1 -->
+      <div class="step">
+        <span class="step_num">01</span>
+        <h3 class="step_title">
+          Расскажите нам, что вам нравится (и что не нравится)
+        </h3>
+        <p class="step_text">
+          Больше не тратьте время на размышления о том, что есть! Omnifood AI создаст для вас на 100% персонализированный еженедельный план питания. Он гарантирует, что вы получите все необходимые питательные вещества и витамины, независимо от вашей диеты!
+        </p>
+      </div>
+      <div class="step_img">
+        <img src="img/app/app-screen-1.webp" class="step_photo" alt="step_photo1" />
+      </div>
+
+      <!-- Шаг 2 -->
+      <div class="step_img">
+        <img src="img/app/app-screen-2.webp" class="step_photo" alt="step_photo2" />
+      </div>
+      <div class="step">
+        <span class="step_num">02</span>
+        <h3 class="step_title">Утвердите свой еженедельный план питания</h3>
+        <p class="step_text">
+          Раз в неделю утверждайте план питания, сгенерированный для вас Omnifood AI. Вы можете менять ингредиенты, заменять целые блюда или даже добавлять свои собственные рецепты.
+        </p>
+      </div>
+
+      <!-- Шаг 3 -->
+      <div class="step">
+        <span class="step_num">03</span>
+        <h3 class="step_title">Получайте еду в удобное время</h3>
+        <p class="step_text">
+          Лучшие повара города будут готовить выбранное вами блюдо каждый день, и мы доставим его к вашей двери в удобное для вас время. Вы можете ежедневно менять график и адрес доставки!
+        </p>
+      </div>
+      <div class="step_img">
+        <img src="img/app/app-screen-3.webp" class="step_photo" alt="step_photo3" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Секция "Прием пищи" (FOOD/MEALS) -->
+  <section class="food" id="meals">
+    <div class="wrap text_center">
+      <span class="food_label">ПРИЕМ ПИЩИ</span>
+      <h2 class="food_title">
+        Система Omnifood AI выбирает из более чем 5000 рецептов
+      </h2>
+    </div>
+
+    <div class="food_basic">
+      <!-- Карточка 1: Японские Гедза -->
+      <div class="card">
+        <img src="img/meals/meal-1.webp" class="card_img" alt="Японские Гедза" />
+        <div class="card_info">
+          <div class="card_tags">
+            <span class="tag tag_green">Вегетарианское</span>
+          </div>
+          <p class="card_name">Японские Гедза</p>
+          <ul class="card_props">
+            <li class="prop">
+              <ion-icon class="prop_icon" name="flame-outline"></ion-icon>
+              <span><strong>650</strong> калорий</span>
+            </li>
+            <li class="prop">
+              <ion-icon class="prop_icon" name="restaurant-outline"></ion-icon>
+              <span>NutriScore ® <strong>74</strong></span>
+            </li>
+            <li class="prop">
+              <ion-icon class="prop_icon" name="star-outline"></ion-icon>
+              <span><strong>4.9</strong> рейтинг (537)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Карточка 2: Салат с авокадо (с двумя тегами) -->
+      <div class="card">
+        <img src="img/meals/meal-2.webp" class="card_img" alt="Салат с авокадо" />
+        <div class="card_info">
+          <div class="card_tags">
+            <span class="tag tag_light">Веганское</span>
+            <span class="tag tag_yellow">Палео</span>
+          </div>
+          <p class="card_name">Салат с авокадо</p>
+          <ul class="card_props">
+            <li class="prop">
+              <ion-icon class="prop_icon" name="flame-outline"></ion-icon>
+              <span><strong>400</strong> калорий</span>
+            </li>
+            <li class="prop">
+              <ion-icon class="prop_icon" name="restaurant-outline"></ion-icon>
+              <span>NutriScore ® <strong>92</strong></span>
+            </li>
+            <li class="prop">
+              <ion-icon class="prop_icon" name="star-outline"></ion-icon>
+              <span><strong>4.8</strong> рейтинг (441)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Список диет -->
+      <div class="diets">
+        <h3 class="diets_title">Подходит для любой диеты</h3>
+        <ul class="diets_list">
+          <li class="diets_item">Вегетарианская</li>
+          <li class="diets_item">Веганская</li>
+          <li class="diets_item">Пескетарианская</li>
+          <li class="diets_item">Без глютена</li>
+          <li class="diets_item">Без лактозы</li>
+          <li class="diets_item">Кето</li>
+          <li class="diets_item">Палео</li>
+          <li class="diets_item">Низкий FODMAP</li>
+          <li class="diets_item">Для детей</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wrap food_link">
+      <a href="#" class="link">Посмотреть все рецепты →</a>
+    </div>
+  </section>
+
+  <script>
+    // JavaScript для бургер-меню
+    document.addEventListener('DOMContentLoaded', function() {
+      const burgerMenu = document.getElementById('burgerMenu');
+      const mainMenu = document.getElementById('mainMenu');
+      const overlay = document.getElementById('overlay');
+      
+      function toggleMenu() {
+        burgerMenu.classList.toggle('active');
+        mainMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        // Блокируем прокрутку body при открытом меню
+        if (mainMenu.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      }
+
+      burgerMenu.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', toggleMenu);
+
+      // Закрываем меню при клике на ссылку
+      const menuLinks = document.querySelectorAll('.m_item');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (mainMenu.classList.contains('active')) {
+            toggleMenu();
+          }
+        });
+      });
+
+      // Проверяем ширину экрана и сбрасываем меню при ресайзе
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 390) {
+          if (mainMenu.classList.contains('active')) {
+            burgerMenu.classList.remove('active');
+            mainMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
